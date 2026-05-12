@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CharacterController 数值稳定性 | Modern Unity Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <article class="article-layout">
+            <a class="back-link" href="../index.html">返回首页</a>
+            <p class="eyebrow">Controller</p>
+            <h1>CharacterController 项目里最常见的数值坑</h1>
+            <p class="lead">
+                使用 CharacterController 做移动角色时，表面上看最常见的问题是“脚感不对”，但真正容易把项目拖进线上异常的，
+                通常是数值稳定性。角色重生瞬间的位置、速度投影、地面吸附和重力累积，都会在极端情况下把一个看似正常的流程推成 NaN。
+            </p>
+
+            <h2>为什么 NaN 很危险</h2>
+            <p>
+                一旦某一帧的速度、位移或目标位置进入 NaN，后续依赖这个值的所有运动计算都会继续失真。更糟的是，很多异常并不会在第一时间中断，
+                而是先以“偶发瞬移”“特效飞走”“敌人出生位置非法”等形式出现，最后才在控制台里抛出 `Input position is { NaN, NaN, NaN }`。
+            </p>
+
+            <h2>高风险位置</h2>
+            <ul>
+                <li>对旧速度向量做投影时，分母使用了极小值甚至零向量</li>
+                <li>重生前一帧角色处于异常物理状态，复用旧速度继续参与新一轮计算</li>
+                <li>基于法线修正水平速度时，没有对向量有效性做保护</li>
+                <li>在空中状态与落地状态之间切换时，重力值和跳跃值被叠加多次</li>
+            </ul>
+
+            <h2>更稳妥的写法</h2>
+            <p>对关键数值做有限值检查，并在发现异常时优先归零，而不是继续把非法值传下去：</p>
+            <pre><code>static bool IsFinite(float value)
+{
+    return !float.IsNaN(value) &amp;&amp; !float.IsInfinity(value);
+}
+
+static bool IsFinite(Vector3 value)
+{
+    return IsFinite(value.x) &amp;&amp; IsFinite(value.y) &amp;&amp; IsFinite(value.z);
+}
+
+if (!IsFinite(velocity))
+{
+    velocity = Vector3.zero;
+}</code></pre>
+
+            <h2>工程建议</h2>
+            <p>
+                我的建议是把“角色是否能动”和“角色数值是否合法”分开检查。前者是玩法问题，后者是稳定性问题。只要把这两个层面拆开，很多难复现的问题都会明显变得可定位。
+            </p>
+        </article>
+    </div>
+</body>
+</html>

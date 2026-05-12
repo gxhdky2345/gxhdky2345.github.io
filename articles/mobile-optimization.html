@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>移动端性能预算 | Modern Unity Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <article class="article-layout">
+            <a class="back-link" href="../index.html">返回首页</a>
+            <p class="eyebrow">Optimization</p>
+            <h1>移动端性能优化不是一组技巧，而是一条预算链</h1>
+            <p class="lead">
+                很多项目讨论优化时，总是在“再合一张图集”“再关一个特效”和“再砍一点阴影”之间反复摇摆。真正更有效的方法，
+                是先给 CPU、GPU、内存和 IO 各自设预算，再决定优化优先级。
+            </p>
+
+            <h2>先看数据，不看感觉</h2>
+            <p>
+                如果一个场景在高端设备上是 60 FPS，而在中低端设备上跌到 35 FPS，第一件事不是猜，而是看 Profiler。判断卡顿到底来自渲染、脚本、GC 还是资源加载，成本完全不同。
+            </p>
+
+            <h2>常见的预算拆法</h2>
+            <ul>
+                <li>CPU：角色逻辑、AI、UI 刷新、动画、路径计算</li>
+                <li>GPU：透明叠层、后处理、阴影、粒子和过高的屏幕填充率</li>
+                <li>内存：大纹理、未释放对象、音频缓存和 AssetBundle 生命周期</li>
+                <li>IO：场景切换、异步加载顺序、首帧资源预热</li>
+            </ul>
+
+            <h2>最容易产生收益的动作</h2>
+            <p>
+                对象池、减少 UI 重建、限制高频分配、把大资源切成可控的小块，通常比“全盘重构”更快见效。尤其在移动端，GC 抖动和透明 overdraw 常常比单条逻辑慢更致命。
+            </p>
+
+            <h2>落地思路</h2>
+            <p>
+                把性能问题当作一个按设备分层的验收表。确定最低目标机型，记录关键场景的帧率与峰值耗时，再决定哪些内容需要降级。优化的终点不是“更快”，而是“在目标设备上稳定达到体验目标”。
+            </p>
+        </article>
+    </div>
+</body>
+</html>

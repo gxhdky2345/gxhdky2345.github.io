@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>本地化与布局 | Modern Unity Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <article class="article-layout">
+            <a class="back-link" href="../index.html">返回首页</a>
+            <p class="eyebrow">Localization</p>
+            <h1>中文 UI 显示异常时，先查布局，再查字体</h1>
+            <p class="lead">
+                做本地化时，团队很容易把所有显示问题都归因到“字体不支持”。但在实际项目中，中文按钮文案被截断、少字、换行奇怪，更多时候是布局和容器约束导致的。
+            </p>
+
+            <h2>为什么按钮文案最容易出问题</h2>
+            <p>
+                按钮往往同时挂着图标、描边、阴影和自动缩放。只要文本容器留给文字的宽度比设计稿窄一点，再叠加平台回退字体的字面宽度差异，就会出现某个机型正常、另一个机型被截断的现象。
+            </p>
+
+            <h2>排查顺序</h2>
+            <ul>
+                <li>先看 Text 的 RectTransform 实际宽高是否被图标挤占</li>
+                <li>再看 horizontal overflow、vertical overflow 和 best fit 是否冲突</li>
+                <li>最后再确认当前平台真正渲染时使用的是哪套字体</li>
+            </ul>
+
+            <h2>实战建议</h2>
+            <p>
+                对关键按钮，优先保证单行显示，给图标预留固定安全区，并在窄屏设备上降低字号或增加按钮宽度。如果按钮必须支持多语言，最好在设计时就按最长文案进行布局，而不是用英文长度反推所有语言。
+            </p>
+
+            <h2>一个经常被忽略的事实</h2>
+            <p>
+                “开始”正常、“更多游戏”异常，不一定说明字体缺某个字，更可能只是两个按钮的可用宽度不同。排查时一定要看实际 RectTransform 和运行时文字设置，而不是只盯着本地化文本本身。
+            </p>
+        </article>
+    </div>
+</body>
+</html>

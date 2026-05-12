@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商业化上线检查 | Modern Unity Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <article class="article-layout">
+            <a class="back-link" href="../index.html">返回首页</a>
+            <p class="eyebrow">Monetization</p>
+            <h1>广告接入上线前，最容易漏掉的是验证链路而不是代码</h1>
+            <p class="lead">
+                广告能弹出来，只能说明 SDK 接入路径大体可用。想要把正式收入跑稳，还需要把应用关联、商店信息、域名验证和广告位回调这些配置一起闭环。
+            </p>
+
+            <h2>常见误区</h2>
+            <p>
+                很多开发者看到测试设备或线上已经开始出广告，就误以为配置全部完成了。实际上，`app-ads.txt` 未验证通过时，广告可能仍然会展示，只是部分买方不会参与竞价，最终影响填充率和 eCPM。
+            </p>
+
+            <h2>一条更完整的检查链</h2>
+            <ul>
+                <li>确认应用已正确关联到对应商店商品页</li>
+                <li>确认商店公开页面出现开发者网站</li>
+                <li>确认根目录 `app-ads.txt` 可直接访问</li>
+                <li>确认 `app-ads.txt` 内容包含正确的发布商标识</li>
+                <li>确认激励、插屏、横幅的加载失败和展示回调都可被日志覆盖</li>
+            </ul>
+
+            <h2>为什么根目录很关键</h2>
+            <p>
+                广告平台抓取时，通常只根据开发者网站的主机名去找根目录文件，而不是找你写在路径里的某个博客文章地址。这也是为什么第三方博客个人页往往不适合作为 app-ads.txt 的承载地址。
+            </p>
+
+            <h2>推荐做法</h2>
+            <p>
+                给自己准备一个长期可控的静态站点。内容不需要复杂，但域名或子域名的根目录必须可控。GitHub Pages、Firebase Hosting 和 Cloudflare Pages 都是很合适的起步方案。
+            </p>
+        </article>
+    </div>
+</body>
+</html>

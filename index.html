@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modern Unity Notes</title>
+    <meta name="description" content="Unity3D mobile development notes, production checklists, and support resources.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand" href="index.html">Modern Unity Notes</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="#articles">文章</a>
+                <a href="#toolkits">专题</a>
+                <a href="support.html">支持</a>
+                <a href="app-ads.txt">app-ads.txt</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Unity3D Technical Website</p>
+                    <h1>面向移动游戏的 Unity 开发笔记与上线支撑站点</h1>
+                    <p class="hero-text">
+                        这里整理的是偏实战的 Unity3D 经验：角色控制、移动端性能、UI 本地化、商业化落地与版本发布。
+                        站点同时在根目录提供 <a href="app-ads.txt">app-ads.txt</a>，用于广告平台抓取验证。
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#articles">查看文章</a>
+                        <a class="button button-secondary" href="support.html">打开支持页</a>
+                    </div>
+                </div>
+                <aside class="hero-panel">
+                    <p class="panel-title">上线前检查</p>
+                    <ul class="check-list">
+                        <li>确保 App Store 页面显示开发者网站</li>
+                        <li>确保根目录可访问 app-ads.txt</li>
+                        <li>确保移动端 UI 在小屏幕机型稳定</li>
+                        <li>确保重开、存档、广告回调链路可回归验证</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <section class="section-block" id="articles">
+                <div class="section-heading">
+                    <p class="eyebrow">Featured Notes</p>
+                    <h2>原创技术文章</h2>
+                    <p>这些内容是为站点原创整理的 Unity3D 开发摘要，适合用作开发者网站的长期基础内容。</p>
+                </div>
+                <div class="article-grid">
+                    <article class="article-card accent-sand">
+                        <p class="article-tag">Controller</p>
+                        <h3>CharacterController 项目里最常见的数值坑</h3>
+                        <p>角色速度投影、除零、NaN 传播和重生后的速度状态，都是移动游戏里很容易被忽略的稳定性来源。</p>
+                        <a href="articles/character-controller.html">阅读全文</a>
+                    </article>
+                    <article class="article-card accent-teal">
+                        <p class="article-tag">Optimization</p>
+                        <h3>移动端性能优化不是一组技巧，而是一条预算链</h3>
+                        <p>把 CPU、GPU、内存和 IO 拆成预算表，再做对象池、批处理和异步加载，定位会比“感觉卡”更准确。</p>
+                        <a href="articles/mobile-optimization.html">阅读全文</a>
+                    </article>
+                    <article class="article-card accent-rose">
+                        <p class="article-tag">Localization</p>
+                        <h3>中文 UI 显示异常时，先查布局，再查字体</h3>
+                        <p>很多所谓“字体缺字”其实是文字容器宽度、换行模式、图标占位和平台回退字体共同作用的结果。</p>
+                        <a href="articles/localization-layout.html">阅读全文</a>
+                    </article>
+                    <article class="article-card accent-blue">
+                        <p class="article-tag">Monetization</p>
+                        <h3>广告接入上线前，最容易漏掉的是验证链路而不是代码</h3>
+                        <p>SDK 能出广告不代表配置已经完整，app-ads.txt、应用关联、商店信息和回调监控都要拉通。</p>
+                        <a href="articles/monetization-checklist.html">阅读全文</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-block" id="toolkits">
+                <div class="section-heading compact">
+                    <p class="eyebrow">Toolkit</p>
+                    <h2>实用专题</h2>
+                </div>
+                <div class="toolkit-grid">
+                    <article class="toolkit-card">
+                        <h3>角色与战斗</h3>
+                        <p>把角色控制拆成输入、运动、状态机和伤害反馈四层，调试时才不会把 bug 混在一起。</p>
+                    </article>
+                    <article class="toolkit-card">
+                        <h3>背包与存档</h3>
+                        <p>拖拽交互、双击装备、战局内临时收益与持久化边界，要在设计阶段就分清楚。</p>
+                    </article>
+                    <article class="toolkit-card">
+                        <h3>移动 UI</h3>
+                        <p>同一组文案在不同机型上看起来完全正常，不代表极窄屏、小字号和回退字体也稳定。</p>
+                    </article>
+                    <article class="toolkit-card">
+                        <h3>商业化配置</h3>
+                        <p>广告收入问题很多都不是 SDK 接入错误，而是商店信息、域名验证和政策配置没有闭环。</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-block section-surface">
+                <div class="section-heading compact">
+                    <p class="eyebrow">Support</p>
+                    <h2>开发者网站用途</h2>
+                </div>
+                <div class="support-grid">
+                    <div>
+                        <p>这个站点可直接作为 App Store Connect 中的 Marketing URL 使用，也可以作为公开的开发者网站页面。</p>
+                        <p>如果你后续还要补 Support URL，可以直接使用 <a href="support.html">support.html</a> 页面。</p>
+                    </div>
+                    <div class="support-links">
+                        <a class="inline-link" href="https://github.com/gxhdky2345">GitHub Profile</a>
+                        <a class="inline-link" href="https://github.com/gxhdky2345/gxhdky2345.github.io">Site Repository</a>
+                        <a class="inline-link" href="app-ads.txt">app-ads.txt</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>Modern Unity Notes</p>
+            <p>Original Unity3D field notes for mobile development and publishing.</p>
+            <p><span id="year"></span> gxhdky2345</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
