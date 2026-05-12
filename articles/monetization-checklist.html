@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>商业化上线检查 | Modern Unity Notes</title>
+    <title>让广告体验更稳定的几个关键做法 | Modern Unity Notes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -14,33 +14,36 @@
         <article class="article-layout">
             <a class="back-link" href="../index.html">返回首页</a>
             <p class="eyebrow">Monetization</p>
-            <h1>广告接入上线前，最容易漏掉的是验证链路而不是代码</h1>
+            <h1>让广告体验更稳定的几个关键做法</h1>
             <p class="lead">
-                广告能弹出来，只能说明 SDK 接入路径大体可用。想要把正式收入跑稳，还需要把应用关联、商店信息、域名验证和广告位回调这些配置一起闭环。
+                对移动游戏来说，广告相关的问题往往不在第一次接入，而是在上线后的长期维护里逐渐出现。
+                同样的广告位，在不同场景、不同失败分支和不同网络状态下能否稳定工作，往往比“是否已经接通”更影响体验与收益。
             </p>
 
             <h2>常见误区</h2>
             <p>
-                很多开发者看到测试设备或线上已经开始出广告，就误以为配置全部完成了。实际上，`app-ads.txt` 未验证通过时，广告可能仍然会展示，只是部分买方不会参与竞价，最终影响填充率和 eCPM。
+                很多团队在广告第一次成功展示后就把任务视为完成，但真正的问题往往从这之后才开始出现。
+                加载失败没有统一兜底、激励回调缺少状态保护、场景切换时重复请求，都会在项目进入稳定运营后不断放大成本。
             </p>
 
-            <h2>一条更完整的检查链</h2>
+            <h2>把广告逻辑整理成统一结构</h2>
             <ul>
-                <li>确认应用已正确关联到对应商店商品页</li>
-                <li>确认商店公开页面出现开发者网站</li>
-                <li>确认根目录 `app-ads.txt` 可直接访问</li>
-                <li>确认 `app-ads.txt` 内容包含正确的发布商标识</li>
-                <li>确认激励、插屏、横幅的加载失败和展示回调都可被日志覆盖</li>
+                <li>让激励、插屏和横幅拥有一致的请求与回调封装</li>
+                <li>在加载失败、展示失败和奖励发放时保留可追踪日志</li>
+                <li>把广告位和具体场景解耦，避免逻辑散落在多个 UI 脚本里</li>
+                <li>明确用户中断、切后台、断网和重复点击时的保护策略</li>
             </ul>
 
-            <h2>为什么根目录很关键</h2>
+            <h2>为什么广告问题总会反复出现</h2>
             <p>
-                广告平台抓取时，通常只根据开发者网站的主机名去找根目录文件，而不是找你写在路径里的某个博客文章地址。这也是为什么第三方博客个人页往往不适合作为 app-ads.txt 的承载地址。
+                广告问题之所以难定位，并不是因为它们足够复杂，而是因为同一套广告逻辑往往横跨多个页面、多个用户状态和多个异步回调。
+                一旦封装不统一，任何一个小改动都可能只修好一个入口，却让另一个入口继续带着旧问题运行。
             </p>
 
             <h2>推荐做法</h2>
             <p>
-                给自己准备一个长期可控的静态站点。内容不需要复杂，但域名或子域名的根目录必须可控。GitHub Pages、Firebase Hosting 和 Cloudflare Pages 都是很合适的起步方案。
+                与其把注意力全部放在“能不能马上出广告”，不如尽早建立统一的广告层、明确场景边界，并给每个关键回调留出检查点。
+                长期看，这种结构化做法会比单点修补更能稳定广告体验，也更能降低后续维护成本。
             </p>
         </article>
     </div>
